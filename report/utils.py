@@ -137,7 +137,8 @@ def recommended_user_action(report):
     respond to the incident report by providing clear, actionable recommendations 
     to the person in distress. Be clear, and more importantly, concise in your
     action recommendations. Prioritize the safety of the individual and
-    others who may be affected by the emergency situation. Here is the user report: 
+    others who may be affected by the emergency situation. Keep your answer short 
+    with only a few action recommendations. Here is the user report: 
     {report}"""
 
     response = client.chat.completions.create(

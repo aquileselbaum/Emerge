@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    {% load static %}
     <style>
         * {
             box-sizing: border-box;
@@ -39,15 +40,22 @@
         }
 
         .header {
-            position: relative;
-            padding: 10px;
+            padding: 30px;
             text-align: center;
-            background-color: #D9453F; /* Red background */
+            background-color: #D9453F;
             color: white;
             text-shadow: 1px 1px 2px #000000; /* Subtle text shadow */
-            border-radius: 4px;
+            border-radius: 4px; 
+            background-image: url("{% static 'report/images/emerge.png' %}");
+            background-position: center; /* Center the image */ 
+            background-size: contain; /* Adjust the image size to cover the header*/
+            background-repeat: no-repeat;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for button */
+            overflow: hidden; /* Ensure the gradient line is visible if it overflows */
         }
-
+ 
+ /*/////////////////////////////////////////////////////*/
         .header::after {
             content: '';
             position: absolute;
@@ -56,8 +64,8 @@
             right: 0;
             height: 4px; /* Height of the gradient line */
             background: linear-gradient(to right, #F2E5E3,#D9453F, #F2E5E3); /* Gradient from dark red to light red */
-            z-index: 1;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 5; 
+ 
         }
 
         .navbar {
@@ -201,11 +209,10 @@
 </head>
 
 {% block content %}
-{% if report %}
 <body>
 
 <div class="header">
-    <h1>EMERGE</h1>
+    
 </div>
 
 
@@ -220,11 +227,15 @@
             <div class="fakeimg" style="height: 400px;">
                 <div class="top"><p>Highest Priority Report</p></div>
                 <div class="bottom">
+                    {% if report %}
                     <strong>Priority Level:</strong> {{ report.priority }}<br>
                     <strong>Location:</strong> {{ report.location }}<br>
                     <strong>Description:</strong> {{ report.description }}<br>
                     <strong>Emergency for me:</strong> {{ report.emergencyForMe }}<br>
                     <strong>Emergency for someone else:</strong> {{ report.emergencyForSomeoneElse }}
+                    {% else %}
+                        No reports available.
+                    {% endif %}
                 </div>
             </div>
             <div class="fakeimg" style="height: 300px;">
@@ -245,12 +256,16 @@
     </div>
 </div>
 
+{% if report %}
 <form action="{% url 'mark_resolved' report.id %}" method="post">
     {% csrf_token %}
     <button class="dispatch-button" type="submit">Mark as Resolved</button>
 </form>
+{% endif %}
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    
     document.getElementById('action-button').addEventListener('click', function() {
         var mainDiv = document.querySelector('.main');
         mainDiv.innerHTML = `
@@ -275,11 +290,15 @@
             <div class="fakeimg" style="height: 400px;">
                 <div class="top"><p>Highest Priority Report</p></div>
                 <div class="bottom">
+                    {% if report %}
                     <strong>Priority Level:</strong> {{ report.priority }}<br>
                     <strong>Location:</strong> {{ report.location }}<br>
                     <strong>Description:</strong> {{ report.description }}<br>
                     <strong>Emergency for me:</strong> {{ report.emergencyForMe }}<br>
                     <strong>Emergency for someone else:</strong> {{ report.emergencyForSomeoneElse }}
+                    {% else %}
+                        No reports available.
+                    {% endif %}
                 </div>
             </div>
             <div class="fakeimg" style="height: 300px;">
@@ -298,14 +317,11 @@
             </div>
         `;
     });
+});
 </script>
 </body>
 
 </html>
-
-{% else %}
-<p>No reports available.</p>
-{% endif %}
 
 
 {% endblock %}

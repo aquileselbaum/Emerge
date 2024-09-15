@@ -7,7 +7,10 @@ from django.urls import reverse
 
 def report_list(request):
     report = Report.objects.filter(resolved=False).order_by('priority').first()
-    next_report = Report.objects.filter(resolved=False).filter(priority__gt=report.priority).order_by('priority').first()
+    if report:
+        next_report = Report.objects.filter(resolved=False, priority__gt=report.priority).order_by('priority').first()
+    else:
+        next_report = None
     return render(request, 'report/report_list3.html', {'report': report, 'next_report': next_report})
 
 def submit_report(request):
