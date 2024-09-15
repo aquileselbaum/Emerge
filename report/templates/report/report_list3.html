@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Emerge Responders{% endblock %}</title>
+    <!-- Link to Google Fonts for Titillium Web -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 600,
+                'GRAD' 0,
+                'opsz' 48;
+        }
+
+        .titillium-web-regular {
+            font-family: "Titillium Web", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Titillium Web', sans-serif; /* Apply Titillium Web font */
+            background-color: #F8F8F8; /* Light gray background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+
+        .header {
+            position: relative;
+            padding: 10px;
+            text-align: center;
+            background-color: #D9453F; /* Red background */
+            color: white;
+            text-shadow: 1px 1px 2px #000000; /* Subtle text shadow */
+            border-radius: 4px;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px; /* Height of the gradient line */
+            background: linear-gradient(to right, #F2E5E3,#D9453F, #F2E5E3); /* Gradient from dark red to light red */
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            position: relative;
+            overflow: hidden;
+            background-color: #F2E5E3; /* Light background for navbar */
+            color: black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) inset;
+            border-radius: 0;
+        }
+
+        .side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .side a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 20px 20px;
+            text-decoration: none;
+            background-color: #FAF4F3; /* Light background for links */
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .side a:hover {
+            background-color: #e8cfcd;
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0px;
+            width: 100%;
+        }
+
+        .main {
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #F2E5E3;
+        }
+
+        .side {
+            flex: 10%;
+            background-color:#FAF4F3;
+            border-radius: 20px;
+            font-weight: 400;
+        }
+
+        .main {
+            flex: 60%;
+            background-color: #F2E5E3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fakeimg {
+            position: relative;
+            border-radius: 4px;
+            background-color: White;
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .fakeimg .top {
+            position: relative;
+             text-align: center;
+            background-color: #D9453F; /* Darker red color for the top */
+            color: white; /* White text color for the top part */
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 4px 4px 0 0;
+            z-index: 1;
+            background: linear-gradient(to bottom, #D9453F, #E15B56);
+              background: linear-gradient(to bottom, #D9453F,#E15B56,#E15B56,#D9453F);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow for button */
+        }
+
+        .fakeimg .bottom {
+            color: black; /* Black text color for the bottom part */
+            padding: 20px;
+        }
+
+        .response-location {
+            height: 150px;
+        }
+
+        .list-of-materials {
+            flex: 1;
+        }
+
+        @media screen and (max-width: 700px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+            }
+        }
+
+        .dispatch-button {
+            position: fixed;
+            bottom: 20px;
+            left: 80px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #5b974f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .dispatch-button:hover {
+            background-color: #81b877;
+        }
+    </style>
+    {% load static %}
+</head>
+
+{% block content %}
+{% if report %}
+<body>
+
+<div class="header">
+    <h1>EMERGE</h1>
+</div>
+
+
+<div class="main-container">
+    <div class="row">
+        <div class="side">
+            <a href="#" id="reports-button">Reports ></a>
+            <a href="#" id="action-button">Action ></a>
+            <a href="#" id="supplies-button">Supplies ></a>
+        </div>
+        <div class="main">
+            <div class="fakeimg" style="height: 400px;">
+                <div class="top"><p>Highest Priority Report</p></div>
+                <div class="bottom">
+                    <strong>Priority Level:</strong> {{ report.priority }}<br>
+                    <strong>Location:</strong> {{ report.location }}<br>
+                    <strong>Description:</strong> {{ report.description }}<br>
+                    <strong>Emergency for me:</strong> {{ report.emergencyForMe }}<br>
+                    <strong>Emergency for someone else:</strong> {{ report.emergencyForSomeoneElse }}
+                </div>
+            </div>
+            <div class="fakeimg" style="height: 300px;">
+                <div class="top"><p>Report Next in Queue</p></div>
+                <div class="bottom">
+                    {% if next_report %}
+                    <strong>Priority Level:</strong> {{ next_report.priority }}<br>
+                    <strong>Location:</strong> {{ next_report.location }}<br>
+                    <strong>Description:</strong> {{ next_report.description }}<br>
+                    <strong>Emergency for me:</strong> {{ next_report.emergencyForMe }}<br>
+                    <strong>Emergency for someone else:</strong> {{ next_report.emergencyForSomeoneElse }}
+                    {% else %}
+                        No other reports in the queue.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="{% url 'mark_resolved' report.id %}" method="post">
+    {% csrf_token %}
+    <button class="dispatch-button" type="submit">Mark as Resolved</button>
+</form>
+
+<script>
+    document.getElementById('action-button').addEventListener('click', function() {
+        var mainDiv = document.querySelector('.main');
+        mainDiv.innerHTML = `
+            <div class="fakeimg" style="height: 700px;">
+                <div class="top"><p id="boxtop">Recommended Actions</p></div>
+                <div class="bottom"><p id="boxbottom"> {{ report.actionResponse}} </p></div>
+            </div>
+        `;
+    });
+    document.getElementById('supplies-button').addEventListener('click', function() {
+        var mainDiv = document.querySelector('.main');
+        mainDiv.innerHTML = `
+            <div class="fakeimg" style="height: 700px;">
+                <div class="top"><p id="boxtop">Supplies Needed</p></div>
+                <div class="bottom"><p id="boxbottom"> {{ report.suppliesResponse}} </p></div>
+            </div>
+        `;
+    });
+    document.getElementById('reports-button').addEventListener('click', function() {
+        var mainDiv = document.querySelector('.main');
+        mainDiv.innerHTML = `
+            <div class="fakeimg" style="height: 400px;">
+                <div class="top"><p>Highest Priority Report</p></div>
+                <div class="bottom">
+                    <strong>Priority Level:</strong> {{ report.priority }}<br>
+                    <strong>Location:</strong> {{ report.location }}<br>
+                    <strong>Description:</strong> {{ report.description }}<br>
+                    <strong>Emergency for me:</strong> {{ report.emergencyForMe }}<br>
+                    <strong>Emergency for someone else:</strong> {{ report.emergencyForSomeoneElse }}
+                </div>
+            </div>
+            <div class="fakeimg" style="height: 300px;">
+                <div class="top"><p>Report Next in Queue</p></div>
+                <div class="bottom">
+                    {% if next_report %}
+                    <strong>Priority Level:</strong> {{ next_report.priority }}<br>
+                    <strong>Location:</strong> {{ next_report.location }}<br>
+                    <strong>Description:</strong> {{ next_report.description }}<br>
+                    <strong>Emergency for me:</strong> {{ next_report.emergencyForMe }}<br>
+                    <strong>Emergency for someone else:</strong> {{ next_report.emergencyForSomeoneElse }}
+                    {% else %}
+                        No other reports in the queue.
+                    {% endif %}
+                </div>
+            </div>
+        `;
+    });
+</script>
+</body>
+
+</html>
+
+{% else %}
+<p>No reports available.</p>
+{% endif %}
+
+
+{% endblock %}
+

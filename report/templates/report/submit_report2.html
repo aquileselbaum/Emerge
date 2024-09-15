@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Report</title>
+    <!-- Link to Google Fonts for Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    {% load static %}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .titillium-web-regular {
+            font-family: "Titillium Web", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Titillium Web', sans-serif; /* Apply Open Sans font */
+            background-color: #F8F8F8; /* Light gray background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9); /* Shadow for button */
+        }
+        .header {
+           padding: 30px;
+           text-align: center;
+           background-color: #D9453F;
+           color: white;
+           text-shadow: 1px 1px 2px #000000; /* Subtle text shadow */
+           border-radius: 4px; 
+           background-image: url("{% static 'report/images/emerge.png' %}");
+           background-position: center; /* Center the image */ 
+           background-size: contain; /* Adjust the image size to cover the header*/
+           background-repeat: no-repeat;
+           position: relative;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for button */
+           overflow: hidden; /* Ensure the gradient line is visible if it overflows */
+       }
+
+/*/////////////////////////////////////////////////////*/
+       .header::after {
+           content: '';
+           position: absolute;
+           bottom: 0;
+           left: 0;
+           right: 0;
+           height: 4px; /* Height of the gradient line */
+           background: linear-gradient(to right, #F2E5E3,#D9453F, #F2E5E3); /* Gradient from dark red to light red */
+           z-index: 5; 
+
+       }
+        .main-container {
+            display: flex;
+            flex: 1; /* Allow main container to grow and fill available space */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #E6826F; /* Light red */
+            border-radius: 4px; /* Reduced border-radius for less bevel */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%; /* Full width */
+            max-width: 900px; /* Max width for larger screens */
+           
+        }
+        h2 {
+            font-size: 24px;
+            color: white; /* Darker red for headings */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #D9453F; /* Red border */
+            border-radius: 4px; /* Reduced border-radius for less bevel */
+            background-color: #FADBD8; /* Light red background to match text color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0.3, 0.3) inset; /* Shadow for button */
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .form-group textarea {
+            height: 100px;
+            resize: vertical; /* Allow vertical resizing */
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-actions button {
+            background-color: #D9453F; /* Red background */
+            color: white;
+            border: none;
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-actions button:hover {
+            background-color: #C4332D; /* Darker red for hover effect */
+        }
+        /* Responsive layout */
+        @media screen and (max-width: 700px) {
+            .form-container {
+                padding: 15px;
+            }
+            .form-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-actions button {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    
+</div>
+
+<div class="main-container">
+    <div class="form-container">
+        <h2>Emergency Report Form</h2>
+        <form>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="Enter your location">
+            </div>
+            <div class="form-group">
+                <label for="description">Description of Emergency:</label>
+                <textarea id="description" name="description" placeholder="Describe the emergency"></textarea>
+            </div>
+       
+            <div class="form-group">
+                <label><input type="checkbox" name="emergencyForMe"> Emergency is for me</label>
+                <label><input type="checkbox" name="emergencyForSomeoneElse"> For someone else</label>
+            </div>
+         
+            <div class="form-actions">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Summary</title>
+    <!-- Link to Google Fonts for Open Sans -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F8F8F8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 10px;
+            text-align: center;
+            background-color: #D9453F;
+            color: white;
+            text-shadow: 1px 1px 2px #000000;
+            border-radius: 4px;
+        }
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .summary-container {
+            background-color: #E6826F;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #D9453F;
+            margin-bottom: 20px;
+        }
+        .summary-group {
+            margin-bottom: 20px;
+        }
+        .summary-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .summary-group p {
+            margin: 0;
+            padding: 10px;
+            border: 1px solid #D9453F;
+            border-radius: 4px;
+            background-color: #FADBD8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Report Summary</h1>
+</div>
+
+<div class="main-container">
+    <div class="summary-container">
+        <h2>Report Details</h2>
+        <div class="summary-group">
+            <label for="location">Location:</label>
+            <p>{{ report.location }}</p>
+        </div>
+        <div class="summary-group">
+            <label for="description">Description of Emergency:</label>
+            <p>{{ report.description }}</p>
+        </div>
+        <div class="summary-group">
+            <label for="emergencyForMe">Emergency is for me:</label>
+            <p>{{ report.emergencyForMe|yesno:"Yes,No" }}</p>
+        </div>
+        <div class="summary-group">
+            <label for="emergencyForSomeoneElse">For someone else:</label>
+            <p>{{ report.emergencyForSomeoneElse|yesno:"Yes,No" }}</p>
+        </div>
+        <h2>AI Response</h2>
+        <p>{{ response }}</p>
+    </div>
+</div>
+
+</body>
+</html>
